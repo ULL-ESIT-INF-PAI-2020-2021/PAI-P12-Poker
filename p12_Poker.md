@@ -51,7 +51,10 @@ A pesar de que este documento está escrito en español, se propone que los iden
 que se usen en el código JavaScript utilicen la terminología en inglés para el entorno a 
 modelar en los programas: cartas (cards), mazo de cartas (deck), etc.
 
-### El problema de las 8 reinas
+Antes de comenzar a desarrollar su programa dedique el tiempo necesario a diseñar la estructura de clases que
+utilizará en su programa, así como las relaciones existentes entre las mismas.
+Realice un diseño incremental del programa comprobando cada una de las funcionalidades que añade, siguiendo un
+desarrollo TDD.
 
 ### La clase *Card*
 Se propone desarrollar una clase `Card` que permita representar cartas de la barja francesa.
@@ -165,13 +168,13 @@ Un paso adicional es disponer de un método `moveCards()` que toma dos argumento
 
 En algunos juegos, las cartas se mueven de una mano a otra, o de una mano al mazo. Se puede usar `moveCards()` para cualquiera de estas operaciones.
 
-### Ejercicios
-Ejercicio 1. Escriba un método de `Deck` llamado `dealHands()` que toma dos parámetros: el número de manos y el número de cartas por mano. 
+### Interfaz gráfica del programa. La clase *PokerHand*.
+Escriba un método de `Deck` llamado `dealHands()` que toma dos parámetros: el número de manos y el número de cartas por mano. 
 Debe crear el número apropiado de manos, repartir el número apropiado de cartas por mano y devolver una lista de Manos.
 
-Ejercicio 2. En el póker las manos son de 5 cartas. 
+En el póker las manos son de 5 cartas. 
+Desarrolle una clase `PokerHand()` que representará una mano de Póker.
 Las siguientes son las posibles manos en el póquer, en orden creciente de valor y decreciente de probabilidad:
-
 * *Pair* (Pareja): dos cartas con el mismo valor.
 * *Two Pair* (Doble par): dos pares de cartas con el mismo valor.
 * *Three of a kind* (Trío): tres cartas con el mismo valor.
@@ -181,75 +184,35 @@ Las siguientes son las posibles manos en el póquer, en orden creciente de valor
 * *Four of a Kind* (Poker): cuatro cartas con el mismo valor.
 * *Straight Flush* (Escalera real): cinco cartas en secuencia (como se definió anteriormente) y con el mismo palo.
 
-El objetivo de este ejercicio es estimar la probabilidad de conseguir estas diversas manos.
+Añada a la clase `PokerHand` métodos llamados `hasPair()`, `hasTwopair()`, `hasThreeOfaKind()` etc. 
+que devuelven Verdadero o Falso según si la mano cumple o no los criterios pertinentes. 
+Su código debería funcionar correctamente para manos que contengan cualquier número de 
+cartas (aunque 5 y 7 son los tamaños más comunes).
 
-2.1 Desarrolle un programa `poker-hand.js` que implemente una clase `PokerHand()` que representará una mano de Póker.
-Escriba un programa `poker-game.js` que reparta siete manos de 
-[póquer de 7-cartas](https://en.wikipedia.org/wiki/Seven-card_stud)
-véase además [esta otra referencia](http://people.math.sfu.ca/~alspach/comp20/)
-y comprueba si alguna de ellas contiene una escalera.
+Desarrolle un método `classify()` que determine la clasificación 
+de mayor valor para una mano y establezca el atributo de la etiqueta de esa mano en consecuencia. 
+Por ejemplo, una mano de 5 cartas podría contener un trío y un par; debería ser etiquetada como "Three of a
+kind" (trío) puesto que esa es la jugada de mayor valor.
 
-2.2 Añada métodos a `poker-hand.js` llamados `hasPair()`, `hasTwopair()`, `hasThreeOfaKind()` etc. que devuelven Verdadero o Falso según si la mano cumple o no los criterios pertinentes. 
-Su código debería funcionar correctamente para manos que contengan cualquier número de cartas (aunque 5 y 7 son los tamaños más comunes).
-
-2.3 Escriba un método `classify()` que determine la clasificación de mayor valor para una mano y establezca el atributo de la etiqueta de esa mano en consecuencia. 
-Por ejemplo, una mano de 7 cartas podría contener una escalera y un par; debería ser etiquetada como "flush" (escalera).
-
-2.4 Cuando esté convencido de que sus métodos de clasificación funcionan, el siguiente paso es estimar las probabilidades de las distintas manos. 
-Escriba una función en `poker-hand.js` que baraje un mazo de cartas, la divida en manos, clasifique las manos y cuente el número de veces que aparecen las distintas clasificaciones.
-
-Imprima una tabla de las clasificaciones y sus probabilidades y muestre esos resultados tanto por pantalla como a través de un fichero JSON.
-Ejecute su programa con un número cada vez mayor de manos hasta que los valores de salida converjan con un grado razonable de precisión.
-
-Compare sus resultados con los valores que se indican [en Wikipedia](https://en.wikipedia.org/wiki/Poker_probability).
-
-#################################################
-* Comience por adaptar su programa del problema de las 8 reinas al paradigma orientado a objetos:
-  identifique clases y métodos y reescriba ese programa de forma correspondiente.
-
-* Desarrolle una página web cuya interfaz gráfica se asemeje lo más posible, en cuanto a su apariencia, no en
-  cuanto a sus funcionalidades, a la que se muestra en esta imagen:
-![Ajedrez](https://raw.githubusercontent.com/fsande/PAI-Labs-Public-Data/master/img/p11_Chess/chess.png "Ajedrez")
-  También puede ver la interfaz que se pretende imitar iniciando una partida en 
-  [esta página de juego on-line de ajedrez](https://lichess.org).
-	Su página ha de imitar colores, tipografías, tamaños y distribución de los elementos.
-  En el directorio `img` de este proyecto puede Ud. encontrar imágenes gráficas para las figuras del juego.
-  Puede Ud. usar estas u otras si le parecen más adecuadas.
-
-* Se colocarán en la página enlaces similares a los que figuran en la página de referencia, pero en su caso
-	esos enlaces no estarán operativos (no enlazan a otras páginas) o en todo caso enlazarán con páginas
-  alojadas en su máquina IaaS de la asignatura.
-
-* Añada un pie de página (*footer*) en el que incluya información sobre la Universidad,
-  titulación y asignatura.
-
-* Añada en su página los siguientes elementos:
-
-1. Un botón `Generar solución` que al ser pulsado dibuje en el tablero sucesivas soluciones al problema de las 8
-reinas.
-
-2. Un segundo botón `Partida de ajedrez` que al ser pulsado dibuje en el tablero la configuración inicial de
-las piezas de una partida de ajedrez. 
-
-* Sustituya en su página el panel que figura a la derecha del tablero en la web de referencia e incluya en él
-  un panel en el que, para cada solución que se muestre para el problema de las 8 reinas imprima 
-	en [notación algebraica](https://en.wikipedia.org/wiki/Algebraic_notation_(chess)) las posiciones que ocupa
-	cada una de las 8 reinas ubicadas en el tablero.
-	
-* No añada a la interfaz gráfica (web) de su programa otros elementos que los que se describen en esta especificación.
-  Trate asimismo de ceñirse a la utilización de los elementos HTML y CSS estudiados en las clases de teoría.
+Desarrolle una página `poker.html` que muestre el viewport de su navegador dividido 
+en dos mitades, superior e inferior. 
+En cada una de las dos mitades (dos filas) ha de ubicar espacio para mostrar 5 cartas de 
+póker (una mano en cada fila, 10 cartas en total) y por debajo de estas dos mitades ha de 
+colocar sendos botones `Deal Hand1`, `Deal Hand2` que al ser pulsados produzcan la 
+visualización de una mano (5 cartas) asignadas a cada jugador.
+El programa ha de indicar cuál de los dos jugadores gana: jugador número uno, al que correponden 
+las cartas de la primera fila el número dos, a quien se asignan las cartas de la segunda fila.
 
 ### Presentación de resultados
 La visualización de la ejecución del programa se realizará a través de una página web alojada
 en la máquina IaaS-ULL de la asignatura y cuya URL tendrá la forma:
 
-`http://10.6.129.123:8080/einstein-albert-chess.html` [1]
+`http://10.6.129.123:8080/einstein-albert-poker.html` [1]
 
-en la que se incustará un canvas para dibujar el tablero.
+en la que se incustará un canvas para dibujar las manos de la partida de poker.
 Sustituya *Albert Einstein* por su nombre y apellido en la URL de su página.
 
-Utilice código HTML y CSS para imitar en la medida de lo posible la apariencia de la web de referencia
-[web de referencia](https://lichess.org/).
+Utilice código HTML y CSS para lograr una página funcional y visualmente correcta.
 
 Diseñe asimismo otra página HTML simple 
 
