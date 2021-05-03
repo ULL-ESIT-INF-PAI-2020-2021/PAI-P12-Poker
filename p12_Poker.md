@@ -42,7 +42,7 @@ En esta práctica se desarrollará una aplicación JavaScript para representar
 Consulte
 [Wikipedia](http://en.wikipedia.org/wiki/Poker), 
 para un conocimiento básico de este juego, en caso de que no lo conozca.
-Este documento explica todo lo que se precisa para los ejercicios a realizar.
+Este documento explica todo lo que se precisa para la aplicación que ha de realizar.
 
 A pesar de que este documento está escrito en español, se propone que los identificadores 
 que se usen en el código JavaScript utilicen la terminología en inglés para el entorno a 
@@ -50,12 +50,15 @@ modelar en los programas: cartas (cards), mazo de cartas (deck), etc.
 
 Antes de comenzar a desarrollar su programa dedique el tiempo necesario a diseñar la estructura de clases que
 utilizará en su programa, así como las relaciones existentes entre las mismas.
-Realice un diseño incremental del programa comprobando cada una de las funcionalidades que añade, siguiendo un
+Una aplicación para la realización de diagramas UML puede resultarle útil para esta finalidad, aunque también
+puede usar simplemente papel y bolígrafo.
+Realice, como siempre, un diseño incremental del programa comprobando cada una de las funcionalidades que añade, siguiendo un
 desarrollo TDD.
 
+Todas las clases que se propone desarrollar han de encapsularse en módulos ES6.
+
 ### La clase *Card*
-Se propone desarrollar una clase `Card` que permita representar cartas de la barja francesa.
-La clase ha de encapsularse en un módulo ES6 `card.js`.
+Se propone desarrollar en el módulo `card.js` una clase `Card` que permita representar cartas de la barja francesa.
 La baraja francesa está dividida en cuatro palos (en inglés: *suit*), dos de color rojo y dos de color negro:
 
 * ♠ Spades (picas).
@@ -68,7 +71,8 @@ Se ordenan de menor a mayor "rango" de la siguiente forma: A, 2, 3, 4, 5, 6, 7, 
 Las cartas con letras (figuras), se llaman Jack (J), Queen (Q), King (K) y Ace (A).
 Dependiendo del juego, un As puede ser más alto que el Rey o más bajo que 2.
 
-Si se quiere definir un objeto para representar una carta de juego, es obvio cuáles deben ser los atributos imprescindibles: valor y palo.
+Si se quiere definir una clase para representar una carta de juego, 
+es obvio cuáles deben ser los atributos imprescindibles: valor, palo y la imagen asociada con la carta.
 Cualquier implementación que se elija para los atributos ha de permitir comparar cartas para determinar cuál tiene un valor o palo más alto.
 
 Defina una clase `Card` para representar las cartas.
