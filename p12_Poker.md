@@ -4,13 +4,11 @@
 ### Objetivos
 Los objetivos de esta práctica son:
 
-* Poner en práctica conceptos de Programación Orientada a Eventos en JavaScript.
 * Poner en práctica metodologías y conceptos de Programación Orientada a Objetos.
+* Poner en práctica conceptos de Programación Orientada a Eventos en JavaScript.
 * Poner en práctica conceptos de Programación Gráfica en JavaScript usando la API Canvas.
 * Practicar el uso de elementos HTML básicos.
 * Practicar el uso de algunas propiedades básicas de CSS para dotar de estilo a una página web simple.
-* Poner en práctica metodologías y conceptos de Programación Orientada a Objetos en JavaScript.
-* Profundizar en el uso de pruebas de software (testing) utilizando Mocha y Chai.
 
 ### Rúbrica de evaluacion del ejercicio
 Se señalan a continuación los aspectos más relevantes (la lista no es exhaustiva)
@@ -37,7 +35,6 @@ que se tendrán en cuenta a la hora de evaluar esta práctica:
 * El programa debe ajustarse al paradigma de Orientación a Objetos.
 * Todo el código estará ubicado en el directorio `src` del proyecto. Use subdirectorios de éste si le resulta
   conveniente.
-
 
 ### El juego del Poker
 En esta práctica se desarrollará una aplicación JavaScript para representar 
