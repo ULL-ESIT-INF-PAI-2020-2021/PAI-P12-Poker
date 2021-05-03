@@ -74,6 +74,8 @@ Dependiendo del juego, un As puede ser más alto que el Rey o más bajo que 2.
 Si se quiere definir una clase para representar una carta de juego, 
 es obvio cuáles deben ser los atributos imprescindibles: valor, palo y la imagen asociada con la carta.
 Cualquier implementación que se elija para los atributos ha de permitir comparar cartas para determinar cuál tiene un valor o palo más alto.
+El directorio `img` de este proyecto contiene ficheros gráficos correspondientes a todas las cartas de la
+baraja francesa.
 
 Defina una clase `Card` para representar las cartas.
 Si no se especifica algo diferente, al crear un objeto de esta clase se crearía un 2 de tréboles.
@@ -81,7 +83,7 @@ Para instanciar un objeto Carta se usaría un código como:
 ```javascript
 const myCard = new Card(SUIT, RANK);
 ```
-Con propósitos de depuración le resultará útil desarrollar un método `toString()` que permita imprimir un objeto `Card`.
+A efectos de depuración le resultará útil desarrollar un método `toString()` que permita imprimir un objeto `Card`.
 Las cartas han de poder imprimirse de forma que sean legibles para un humano.
 Así en pantalla esperamos encontrar textos como:
 
@@ -97,9 +99,6 @@ Y debería poderse escribir:
 const jackOfHearts = new Card(HEARTS, JACK);
 console.log(jackOfHearts);  // -> Jack of Hearts
 ```
-
-El directorio `img` de este proyecto contiene ficheros gráficos correspondientes a todas las cartas de la
-baraja francesa.
 
 También resulta necesario un mecanismo que permita comparar cartas.
 El orden de las cartas no es obvio. 
@@ -132,13 +131,12 @@ Queen of Spades
 King of Spades
 ```
 
-### Añadir, quitar, barajar y clasificar
 Para gestionar el mazo y poder repartir cartas se precisan métodos para
 * Eliminar una carta del mazo y devolverla. `popCard()`
 * Añadir una carta determinada al mazo. `addCard()`
 * Barajar (mezclar) las cartas del mazo de modo que al sacar una carta del mazo, 
   ésta no esté predeterminada por la configuración del mismo (aleatoriedad). `shuffle()`
-* Resulta conveniente disponer de un método `sort()` que ordene las cartas del mazo.
+* Resulta también conveniente disponer de un método `sort()` que ordene las cartas del mazo.
 
 ### Manos de cartas. La clase *Hand*.
 Para avanzar en el diseño de la aplicación propuesta se precisa también una clase 
@@ -147,7 +145,6 @@ Una mano (*Hand*) es similar a un mazo: tanto un mazo como una mano están forma
 por un conjunto de cartas, y ambos requieren operaciones como añadir y quitar cartas.
 Una mano también es diferente de un mazo puesto que hay operaciones necesarias para las manos que no tienen sentido para un mazo. 
 Por ejemplo, en el póquer podríamos comparar dos manos para ver cuál gana. 
-En el bridge, podríamos calcular la puntuación de una mano para hacer una apuesta.
 El método que inicialice una mano debería inicializarla con un conjunto vacío de cartas:
 
 ```javascript
@@ -159,6 +156,7 @@ La clase `Hand` también ha de disponer, como se ha expuesto, de métodos `popCa
 
 ```javascript
 let deck = new Deck();
+let hand = new Hand();  // Creates an empty hand
 let card = deck.popCard();
 hand.addCard(card);
 console.log(hand);	// -> King of Spades
@@ -167,9 +165,9 @@ console.log(hand);	// -> King of Spades
 Un paso adicional es disponer de un método `moveCards()` que toma dos argumentos: una mano y el número de cartas a repartir.
 `moveCards()` toma el número de cartas a repartir del mazo y las coloca en la mano.
 
-En algunos juegos, las cartas se mueven de una mano a otra, o de una mano al mazo. Se puede usar `moveCards()` para cualquiera de estas operaciones.
+En algunos juegos, las cartas se mueven de una mano a otra, o de una mano al mazo. 
+Se podría usar `moveCards()` para cualquiera de estas operaciones.
 
-### Interfaz gráfica del programa. La clase *PokerHand*.
 Escriba un método de `Deck` llamado `dealHands()` que toma dos parámetros: el número de manos y el número de cartas por mano. 
 Debe crear el número apropiado de manos, repartir el número apropiado de cartas por mano y devolver una lista de Manos.
 
@@ -179,7 +177,8 @@ Las siguientes son las posibles manos en el póquer, en orden creciente de valor
 * *Pair* (Pareja): dos cartas con el mismo valor.
 * *Two Pair* (Doble par): dos pares de cartas con el mismo valor.
 * *Three of a kind* (Trío): tres cartas con el mismo valor.
-* *Straight* (Escalera): cinco cartas con valores en secuencia (los ases pueden ser altos o bajos, así que el As-2-3-4-5 es una escalera y también lo es el 10-Jack-Queen-King-Ace, pero el Queen-King-Ace-2-3 no lo es).
+* *Straight* (Escalera): cinco cartas con valores en secuencia (los ases pueden ser altos o bajos, 
+  así que el Ace-2-3-4-5 es una escalera y también lo es el 10-Jack-Queen-King-Ace, pero el Queen-King-Ace-2-3 no lo es).
 * *Flush* (Color): cinco cartas con el mismo palo.
 * *Full House* (Full): tres cartas con un valor, dos cartas con otro.
 * *Four of a Kind* (Poker): cuatro cartas con el mismo valor.
@@ -191,10 +190,11 @@ Su código debería funcionar correctamente para manos que contengan cualquier n
 cartas (aunque 5 y 7 son los tamaños más comunes).
 
 Desarrolle un método `classify()` que determine la clasificación 
-de mayor valor para una mano y establezca el atributo de la etiqueta de esa mano en consecuencia. 
+de mayor valor para una mano y establezca un atributo de esa mano (valor de la mano) en consecuencia. 
 Por ejemplo, una mano de 5 cartas podría contener un trío y un par; debería ser etiquetada como "Three of a
 kind" (trío) puesto que esa es la jugada de mayor valor.
 
+### Interfaz gráfica del programa. 
 Desarrolle una página `poker.html` que muestre el viewport de su navegador dividido 
 en dos mitades, superior e inferior. 
 En cada una de las dos mitades (dos filas) ha de ubicar espacio para mostrar 5 cartas de 
