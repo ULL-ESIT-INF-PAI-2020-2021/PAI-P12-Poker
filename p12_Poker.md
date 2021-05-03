@@ -81,7 +81,7 @@ Para instanciar un objeto Carta se usaría un código como:
 ```javascript
 const myCard = new Card(SUIT, RANK);
 ```
-Desarrolle un método `toString()` que permita imprimir un objeto `Card`.
+Con propósitos de depuración le resultará útil desarrollar un método `toString()` que permita imprimir un objeto `Card`.
 Las cartas han de poder imprimirse de forma que sean legibles para un humano.
 Así en pantalla esperamos encontrar textos como:
 
